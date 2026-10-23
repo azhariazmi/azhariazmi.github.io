@@ -1,0 +1,110 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#3b0000">
+<meta name="description" content="Welcome To My World - Azhari Azmi">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'></text></svg>">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'></text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Welcome To My World </title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden}
+body{background:#000;color:#fff;font-family:Montserrat,sans-serif}
+.theater{position:fixed;inset:0;overflow:hidden;background:#160000}
+.stage{position:absolute;inset:0;background:#160000;display:flex;align-items:center;justify-content:center;text-align:center}
+.stage:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 20%,rgba(255,235,190,.5),rgba(255,210,150,.12) 28%,rgba(0,0,0,.7) 70%,#000 100%)}
+.spotlight{position:absolute;top:-10%;left:50%;width:90vw;height:120vh;transform:translateX(-50%);background:linear-gradient(180deg,rgba(255,245,220,.3),rgba(255,235,190,.06) 75%,transparent);clip-path:polygon(43% 0,57% 0,100% 100%,0 100%);filter:blur(5px);opacity:0;animation:spotlight 2s ease 5.5s forwards}
+.content{position:relative;z-index:2;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:25px}
+.text{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:145px}
+.line{font-family:Cinzel,serif;font-weight:600;text-shadow:0 4px 18px #000,0 0 25px rgba(255,220,170,.4);white-space:nowrap;min-height:1.2em;opacity:0}
+.line1{font-size:clamp(28px,6vw,70px);letter-spacing:2px}
+.line2{font-size:clamp(15px,2.5vw,29px);letter-spacing:1px;margin-top:17px}
+.photo{display:block;width:min(300px,65vw);height:auto;max-height:40vh;object-fit:contain;margin-top:25px;opacity:0;transform:translateY(40px) scale(.75);filter:drop-shadow(0 18px 30px rgba(0,0,0,.95)) drop-shadow(0 0 20px rgba(255,220,170,.3));animation:photo 1.5s ease 12s forwards}
+.floor{position:absolute;bottom:0;left:0;width:100%;height:25%;background:linear-gradient(180deg,transparent,#000 75%);z-index:3;pointer-events:none}
+.curtain{position:absolute;inset:0;z-index:10;background:#3b0000 url("https://i.ibb.co/fY6Ng6nv/premium-red-curtains-stage-theater-or-opera-background-with-spotlight-vector.jpg") center center/cover no-repeat;clip-path:inset(0 0 0 0);animation:openCurtain 5s cubic-bezier(.77,0,.18,1) 1s forwards,closeCurtain 5s cubic-bezier(.77,0,.18,1) 20s forwards;pointer-events:none}
+.curtain:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 15%,rgba(0,0,0,.12) 45%,rgba(0,0,0,.5) 100%)}
+.end{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;animation:showButton .8s ease 25s forwards}
+.enter{display:inline-flex;align-items:center;justify-content:center;padding:16px 34px;border-radius:50px;text-decoration:none;color:#fff;font-family:Cinzel,serif;font-size:clamp(16px,3vw,22px);font-weight:600;letter-spacing:1px;background:linear-gradient(90deg,#520000,#8f0000,#520000);background-size:200% 100%;box-shadow:0 8px 30px rgba(0,0,0,.8),0 0 25px rgba(120,0,0,.5);border:1px solid rgba(255,255,255,.2);transition:.3s}
+.enter:hover{transform:scale(1.06);box-shadow:0 10px 35px rgba(0,0,0,.9),0 0 35px rgba(150,0,0,.65)}
+.profile{position:fixed;inset:0;z-index:100;background:#000;opacity:0;visibility:hidden;transition:opacity .8s ease,visibility .8s ease}
+.profile.show{opacity:1;visibility:visible}
+.profile iframe{width:100%;height:100%;border:0;display:block;background:#000}
+.loading{position:absolute;inset:0;z-index:2;background:#000;display:flex;align-items:center;justify-content:center;font-family:Cinzel,serif;font-size:18px;letter-spacing:2px;color:#fff;transition:opacity .5s ease}
+.profile.loaded .loading{opacity:0;pointer-events:none}
+@keyframes openCurtain{0%{clip-path:inset(0 0 0 0)}100%{clip-path:inset(0 50% 0 50%)}}
+@keyframes closeCurtain{0%{clip-path:inset(0 50% 0 50%)}100%{clip-path:inset(0 0 0 0)}}
+@keyframes spotlight{0%{opacity:0;transform:translateX(-50%) scale(.8)}100%{opacity:1;transform:translateX(-50%) scale(1)}}
+@keyframes photo{0%{opacity:0;transform:translateY(40px) scale(.75)}65%{opacity:1;transform:translateY(-5px) scale(1.04)}100%{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes showButton{0%{opacity:0;transform:scale(.85)}100%{opacity:1;transform:scale(1);pointer-events:auto}}
+@media(max-width:600px){
+.content{padding:20px}
+.text{min-height:125px}
+.line1{letter-spacing:1px}
+.line2{margin-top:12px}
+.photo{width:min(250px,68vw);max-height:35vh;margin-top:20px}
+.spotlight{width:100vw}
+.enter{padding:14px 28px}
+}
+</style>
+</head>
+<body><div class="theater"><div class="stage">
+<div class="spotlight"></div><div class="content">
+<div class="text">
+<div class="line line1"></div>
+<div class="line line2"></div>
+</div><img class="photo" src="https://i.ibb.co/YBxsB9Kp/azhari-bin-azmi.png" alt="Azhari Azmi Ayiemedia">
+</div><div class="floor"></div>
+</div><div class="curtain"></div><div class="end">
+<button class="enter" type="button">Enter My World </button>
+</div></div><div class="profile" id="profile">
+<div class="loading">ENTERING MY WORLD </div>
+<iframe id="profileFrame" title="Azhari Azmi Profile"></iframe>
+</div><script>
+const line1=document.querySelector(".line1");
+const line2=document.querySelector(".line2");
+const text1="My World ";
+const text2="By Azhari Azmi";
+
+function typeText(element,text,speed,delay){
+setTimeout(()=>{
+element.style.opacity="1";
+const characters=Array.from(text);
+let i=0;
+function type(){
+if(i<characters.length){
+element.textContent+=characters[i];
+i++;
+setTimeout(type,speed);
+}
+}
+type();
+},delay);
+}
+
+typeText(line1,text1,150,6200);
+typeText(line2,text2,130,8500);
+
+const enter=document.querySelector(".enter");
+const profile=document.getElementById("profile");
+const frame=document.getElementById("profileFrame");
+
+enter.addEventListener("click",()=>{
+profile.classList.add("show");
+frame.src="https://azhari.netlify.app";
+
+setTimeout(()=>{
+profile.classList.add("loaded");
+},1200);
+});
+
+frame.addEventListener("load",()=>{
+profile.classList.add("loaded");
+});
+</script></body>
+</html>
